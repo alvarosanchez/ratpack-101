@@ -1,3 +1,40 @@
 = Ratpack 101
+Alvaro Sanchez-Mariscal <alvaro.sanchezmariscal@gmail.com>
+:toc: left
+:numbered:
+:source-highlighter: pygments
 
 Introductory workshop about http://ratpack.io[Ratpack].
+
+== Hello World using a Groovy script
+
+The simplest way of creating a Ratpack application is using a Groovy script. Create a file named `ratpack.groovy` with the following content:
+
+[source,groovy]
+----
+@Grab('io.ratpack:ratpack-groovy:0.9.15')
+import static ratpack.groovy.Groovy.ratpack
+
+ratpack {
+    handlers {
+        get {
+            render "Hello World!"
+        }
+        get(":name") {
+            render "Hello $pathTokens.name!"
+        }
+    }
+}
+----
+
+What you see there is the Groovy DSL for Ratpack. Those not yet familiar with it, can try to guess what it's defined there: 2 handlers for HTTP GET requests. We will explore handlers later.
+
+Now let's run that. Go to your terminal and run:
+
+ $ groovy ratpack.groovy
+ 
+The first time you run it it might take a while for http://docs.groovy-lang.org/latest/html/documentation/grape.html[Grape] to resolve the dependencies.
+
+TIP: You can use the JVM parameter `-Dgroovy.grape.report.downloads=true` to get output information about dependencies resolution.
+
+Once it has finished, you can point your browser to http://localhost:5050 or http://localhost:5050/Spring%20IO
