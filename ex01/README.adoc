@@ -1,7 +1,6 @@
 = Ratpack 101
 Alvaro Sanchez-Mariscal <alvaro.sanchezmariscal@gmail.com>
 :toc: left
-:numbered:
 :source-highlighter: pygments
 
 Introductory workshop about http://ratpack.io[Ratpack].
