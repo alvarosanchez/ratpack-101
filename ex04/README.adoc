@@ -1,0 +1,25 @@
+= Ratpack 101
+Alvaro Sanchez-Mariscal <alvaro.sanchezmariscal@gmail.com>
+:toc: left
+:source-highlighter: prettify
+:icons: font
+
+Introductory workshop about http://ratpack.io[Ratpack].
+
+== Testing Ratpack applications with Spock (20 minutes)
+
+=== Unit testing
+
+Unit testing does not require any special infrastructure. Morevover, Ratpack helps you providing a http://ratpack.io/manual/current/api/ratpack/test/handling/RequestFixture.html[`RequestFixture`] which can help you unit testing your handler
+
+So, given the `UsernameHandler` implementation, write a Spock unit test specification that tests it with both empty and non-empty strings.
+
+TIP: http://ratpack.io/manual/current/api/ratpack/test/handling/RequestFixture.html#handle-ratpack.handling.Handler-ratpack.func.Action-
+
+=== Functional testing
+
+Functional testing in the context of a Ratpack app means to spin up a server instance, use an HTTP client to send requests and set assertions on the response received.
+
+For this exercise, write a Spock specification that tests all the handlers defined in the chain (note that in the context of a functional test, logging written on the server side is not possible to test).
+
+TIP: http://ratpack.io/manual/current/testing.html#functional_testing
