@@ -1,11 +1,11 @@
 = Ratpack 101
 Alvaro Sanchez-Mariscal <alvaro.sanchezmariscal@gmail.com>
 :toc: left
-:source-highlighter: pygments
+:source-highlighter: prettify
 
 Introductory workshop about http://ratpack.io[Ratpack].
 
-== Hello World using a Groovy script
+== Hello World using a Groovy script (15 minutes)
 
 The simplest way of creating a Ratpack application is using a Groovy script. Create a file named `ratpack.groovy` with the following content:
 

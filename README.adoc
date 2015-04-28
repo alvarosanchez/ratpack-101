@@ -3,3 +3,13 @@
 Introductory workshop about http://ratpack.io[Ratpack].
 
 It contains a series of excercises in a set of folders. For each one, you will find a `README.html` file with the exercise instructions. Solution is always inside a `solution` folder.
+
+== Software requirements
+
+Make sure you have:
+
+* JDK 8 (both in command line and in your IDE).
+* Git.
+* Gradle.
+* Groovy 2.4.1+ (on the command line)
+* Lazybones installed via http://gvmtool.net/[GVM].
