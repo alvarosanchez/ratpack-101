@@ -1,0 +1,68 @@
+= Ratpack 101
+Alvaro Sanchez-Mariscal <alvaro.sanchezmariscal@gmail.com>
+:toc: left
+:source-highlighter: prettify
+:icons: font
+
+Introductory workshop about http://ratpack.io[Ratpack].
+
+== Working with handlers (30 minutes)
+
+Ratpack is built on top of http://netty.io/[Netty], a non-blocking HTTP server. Once the Ratpack server is started, it will listen for incoming requests, and for each, will execute all the handlers defined in the handler chain.
+
+NOTE: Ratpack *is not* Servlet API-based, so don't expect things `HttpServletRequest` or `HttpSession`. However, you can think of handlers as a mix of a Servlet and a Filter.
+
+Handlers are functions composed in a handler chain. A handler can do one of the following:
+
+* Respond to the request.
+* Delegate to the next handler in the chain.
+* Insert more handlers in the chain and delegate to them.
+
+Each handler receives a http://ratpack.io/manual/current/api/ratpack/handling/Context.html[`Context`] object to interact with the `request`/`response` objects, the chain, etc.
+
+TIP: Handlers are evaluated and executed in the order they are defined.
+
+Using the skeleton provided, complete the following exercises.
+
+:numbered:
+
+=== Delegating to the next handler
+
+Define a handler that prints out (`println`) the requested path, and then delegates to the next handler
+
+TIP: http://ratpack.io/manual/current/api/ratpack/http/Request.html
+
+=== Responding to a specific path
+
+Define a handler that renders `bar` when a request is sent to `/foo`
+
+=== Grouping handlers by path
+
+Define the next handlers nested in the path `/api`.
+
+TIP: http://ratpack.io/manual/current/api/ratpack/handling/Chain.html#prefix-java.lang.String-ratpack.func.Action-
+
+==== Group handlers by HTTP method
+
+Define 2 handlers for the path `/api/methods`:
+
+* If the request is GET, the response is `GET /api/methods`.
+* If the request is POST, the response is `POST /api/methods`.
+
+TIP: http://ratpack.io/manual/current/api/ratpack/handling/Context.html#byMethod-ratpack.func.Action-
+
+==== Defining variable parts in the path
+
+Define a handler for the path `/api/<USERNAME>`, where `<USERNAME>` can be any String. The response must be `Hello, <USERNAME>`
+
+TIP: http://ratpack.io/manual/current/api/ratpack/handling/Context.html#getPathTokens--
+
+==== Defining handlers in it's own class
+
+For other than simple examples, it is often a good practice to define handlers in their own class under `src/groovy`.
+
+Create a handler for the path `/api/now/` and respond with a `new Date()`.
+
+[TIP]
+* http://ratpack.io/manual/current/api/ratpack/handling/Handler.html
+* http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#handler-java.lang.String-ratpack.handling.Handler-
