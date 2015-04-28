@@ -13,3 +13,45 @@ Make sure you have:
 * Gradle.
 * Groovy 2.4.1+ (on the command line)
 * Lazybones installed via http://gvmtool.net/[GVM].
+
+You should have a similar output in your terminal:
+
+----
+$ java -version
+java version "1.8.0_25"
+Java(TM) SE Runtime Environment (build 1.8.0_25-b17)
+Java HotSpot(TM) 64-Bit Server VM (build 25.25-b02, mixed mode)
+
+$ git --version
+git version 2.3.2
+
+$ gradle -v
+
+------------------------------------------------------------
+Gradle 2.3
+------------------------------------------------------------
+
+Build time:   2015-02-16 05:09:33 UTC
+Build number: none
+Revision:     586be72bf6e3df1ee7676d1f2a3afd9157341274
+
+Groovy:       2.3.9
+Ant:          Apache Ant(TM) version 1.9.3 compiled on December 23 2013
+JVM:          1.8.0_25 (Oracle Corporation 25.25-b02)
+OS:           Mac OS X 10.10.2 x86_64
+
+$ groovy -v
+Groovy Version: 2.4.3 JVM: 1.8.0_25 Vendor: Oracle Corporation OS: Mac OS X
+
+$ lazybones help
+Lazybones is a command-line based tool for creating basic software projects from templates.
+
+Available commands:
+
+    create         Creates a new project from a template.
+    config         Displays general help, or help for a specific command.
+    generate       Generates new files in the current project based on a sub-template.
+    list           Lists the templates that are available for you to install.
+    info           Displays information about a template, such as latest version, description, etc.
+    help           Displays general help, or help for a specific command.
+----
