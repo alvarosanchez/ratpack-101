@@ -2,11 +2,41 @@
 Alvaro Sanchez-Mariscal <alvaro.sanchezmariscal@gmail.com>
 :toc: left
 :source-highlighter: prettify
+:icons: font
 
 Introductory workshop about http://ratpack.io[Ratpack].
 
-== Creating Ratpack projects with Lazybones (5 minutes)
+== Creating Ratpack projects with Lazybones and running them with Gradle (10 minutes)
 
+https://github.com/pledbrook/lazybones[Lazybones] is a scaffolding tool to generate application skeletons for different projects, and it's the recommended option for bootstrapping a Ratpack application.
 
+Let’s create a Ratpack project in the current directory:
 
-== Building with Gradle (5 minutes)
+ lazybones create ratpack . 
+
+[WARNING]
+====
+The default Ratpack template comes with Spring Loaded 1.2.1 for hot-swapping code changes while the application is running. That version https://github.com/ratpack/ratpack/issues/654[has a bug that it's fixed in the 1.2.3 release]. The new template will be available with the new Ratpack release, but meanwhile, make sure you are using the correct Spring Loaded version:
+
+[source,groovy]
+.build.gradle
+----
+...
+  springloaded "org.springframework:springloaded:1.2.3.RELEASE"
+...
+----
+
+====
+
+After that, you can run the application with Gradle:
+
+ ./gradlew run
+
+== Examining the project layout (5 minutes)
+
+Once you have created the app, let's have a look at it's content:
+
+* `build.gradle` is the main Gradle build file.
+* `src/main/groovy` is the package root for your Groovy classes (as in all Gradle/Maven applications).
+* `src/ratpack` contains Ratpack specific artifacts. The most important one is `Ratpack.groovy` which contains the Ratpack DSL. If you take a look at it, you will find it similar to the script we created in the previous exercise.
+* `src/test/groovy` will containt your Spock tests.

@@ -409,9 +409,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .hide-for-print{display:none!important}
 .show-for-print{display:inherit!important}}
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad()</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+<script>document.addEventListener('DOMContentLoaded', prettyPrint)</script>
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -423,7 +424,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_hello_world_using_a_groovy_script">Hello World using a Groovy script</a></li>
+<li><a href="#_creating_ratpack_projects_with_lazybones_and_running_them_with_gradle_10_minutes">Creating Ratpack projects with Lazybones and running them with Gradle (10 minutes)</a></li>
+<li><a href="#_examining_the_project_layout_5_minutes">Examining the project layout (5 minutes)</a></li>
 </ul>
 </div>
 </div>
@@ -436,63 +438,79 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_hello_world_using_a_groovy_script">Hello World using a Groovy script</h2>
+<h2 id="_creating_ratpack_projects_with_lazybones_and_running_them_with_gradle_10_minutes">Creating Ratpack projects with Lazybones and running them with Gradle (10 minutes)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The simplest way of creating a Ratpack application is using a Groovy script. Create a file named <code>ratpack.groovy</code> with the following content:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy" data-lang="groovy">@Grab('io.ratpack:ratpack-groovy:0.9.15')
-import static ratpack.groovy.Groovy.ratpack
-
-ratpack {
-    handlers {
-        get {
-            render "Hello World!"
-        }
-        get(":name") {
-            render "Hello $pathTokens.name!"
-        }
-    }
-}</code></pre>
-</div>
+<p><a href="https://github.com/pledbrook/lazybones">Lazybones</a> is a scaffolding tool to generate application skeletons for different projects, and it&#8217;s the recommended option for bootstrapping a Ratpack application.</p>
 </div>
 <div class="paragraph">
-<p>What you see there is the Groovy DSL for Ratpack. Those not yet familiar with it, can try to guess what it&#8217;s defined there: 2 handlers for HTTP GET requests. We will explore handlers later.</p>
-</div>
-<div class="paragraph">
-<p>Now let&#8217;s run that. Go to your terminal and run:</p>
+<p>Let’s create a Ratpack project in the current directory:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>$ groovy ratpack.groovy</pre>
+<pre>lazybones create ratpack .</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>The first time you run it it might take a while for <a href="http://docs.groovy-lang.org/latest/html/documentation/grape.html">Grape</a> to resolve the dependencies.</p>
-</div>
-<div class="admonitionblock tip">
+<div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<div class="title">Tip</div>
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-You can use the JVM parameter <code>-Dgroovy.grape.report.downloads=true</code> to get output information about dependencies resolution.
+<div class="paragraph">
+<p>The default Ratpack template comes with Spring Loaded 1.2.1 for hot-swapping code changes while the application is running. That version <a href="https://github.com/ratpack/ratpack/issues/654">has a bug that it&#8217;s fixed in the 1.2.3 release</a>. The new template will be available with the new Ratpack release, but meanwhile, make sure you are using the correct Spring Loaded version:</p>
+</div>
+<div class="listingblock">
+<div class="title">build.gradle</div>
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">...
+  springloaded "org.springframework:springloaded:1.2.3.RELEASE"
+...</code></pre>
+</div>
+</div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Once it has finished, you can point your browser to <a href="http://localhost:5050" class="bare">http://localhost:5050</a> or <a href="http://localhost:5050/Spring%20IO" class="bare">http://localhost:5050/Spring%20IO</a></p>
+<p>After that, you can run the application with Gradle:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>./gradlew run</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_examining_the_project_layout_5_minutes">Examining the project layout (5 minutes)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Once you have created the app, let&#8217;s have a look at it&#8217;s content:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>build.gradle</code> is the main Gradle build file.</p>
+</li>
+<li>
+<p><code>src/main/groovy</code> is the package root for your Groovy classes (as in all Gradle/Maven applications).</p>
+</li>
+<li>
+<p><code>src/ratpack</code> contains Ratpack specific artifacts. The most important one is <code>Ratpack.groovy</code> which contains the Ratpack DSL. If you take a look at it, you will find it similar to the script we created in the previous exercise.</p>
+</li>
+<li>
+<p><code>src/test/groovy</code> will containt your Spock tests.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-04-26 21:48:59 CEST
+Last updated 2015-04-28 10:54:13 CEST
 </div>
 </div>
 </body>

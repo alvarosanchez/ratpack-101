@@ -2,6 +2,7 @@
 Alvaro Sanchez-Mariscal <alvaro.sanchezmariscal@gmail.com>
 :toc: left
 :source-highlighter: prettify
+:icons: font
 
 Introductory workshop about http://ratpack.io[Ratpack].
 
