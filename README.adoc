@@ -55,3 +55,7 @@ Available commands:
     info           Displays information about a template, such as latest version, description, etc.
     help           Displays general help, or help for a specific command.
 ----
+
+== Acknowledgments
+
+* https://github.com/reanag[Andrea Nagy] for her valuable feedback about this workshop.
