@@ -5,6 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.2">
+<meta name="author" content="Alvaro Sanchez-Mariscal">
 <title>Ratpack 101</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 <style>
@@ -408,10 +409,28 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .hide-for-print{display:none!important}
 .show-for-print{display:inherit!important}}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+<script>document.addEventListener('DOMContentLoaded', prettyPrint)</script>
 </head>
-<body class="article">
+<body class="article toc2 toc-left">
 <div id="header">
 <h1>Ratpack 101</h1>
+<div class="details">
+<span id="author" class="author">Alvaro Sanchez-Mariscal</span><br>
+<span id="email" class="email"><a href="mailto:alvaro.sanchezmariscal@gmail.com">alvaro.sanchezmariscal@gmail.com</a></span><br>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_using_ratpack_modules_with_google_guice_20_minutes">Using Ratpack modules with Google Guice (20 minutes)</a>
+<ul class="sectlevel2">
+<li><a href="#_rendering_json_with_jackson">Rendering JSON with Jackson</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 <div id="content">
 <div id="preamble">
@@ -419,78 +438,34 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>Introductory workshop about <a href="http://ratpack.io">Ratpack</a>.</p>
 </div>
-<div class="paragraph">
-<p>It contains a series of exercises in a set of folders. For each one, you will find a <code>README.html</code> file with the exercise instructions. Solution is always inside a <code>solution</code> folder.</p>
-</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_software_requirements">Software requirements</h2>
+<h2 id="_using_ratpack_modules_with_google_guice_20_minutes">Using Ratpack modules with Google Guice (20 minutes)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Make sure you have:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>JDK 8 (both in command line and in your IDE).</p>
-</li>
-<li>
-<p>Git.</p>
-</li>
-<li>
-<p>Gradle.</p>
-</li>
-<li>
-<p>Groovy 2.4.1+ (on the command line)</p>
-</li>
-<li>
-<p>Lazybones installed via <a href="http://gvmtool.net/">GVM</a>.</p>
-</li>
-</ul>
+<p>As an optional feature, Ratpack offers you the possibility to enhance your application by using modules powered by Guice.</p>
 </div>
 <div class="paragraph">
-<p>You should have a similar output in your terminal:</p>
+<p><a href="https://github.com/google/guice">Google Guice</a> is a dependency injection framework built by Google that allows you to decouple the components of your application by making them reusable parts. Ratpack also offers to you ready to use modules, such as Jackson, H2, Codahale Metrics, Handlebars, etc.</p>
+</div>
+<div class="paragraph">
+<p>When using Gradle and the Ratpack Gradle plugin, adding a "supported" module is as easy as:</p>
 </div>
 <div class="listingblock">
+<div class="title"><code>build.gradle</code></div>
 <div class="content">
-<pre>$ java -version
-java version "1.8.0_25"
-Java(TM) SE Runtime Environment (build 1.8.0_25-b17)
-Java HotSpot(TM) 64-Bit Server VM (build 25.25-b02, mixed mode)
-
-$ git --version
-git version 2.3.2
-
-$ gradle -v
-
-------------------------------------------------------------
-Gradle 2.3
-------------------------------------------------------------
-
-Build time:   2015-02-16 05:09:33 UTC
-Build number: none
-Revision:     586be72bf6e3df1ee7676d1f2a3afd9157341274
-
-Groovy:       2.3.9
-Ant:          Apache Ant(TM) version 1.9.3 compiled on December 23 2013
-JVM:          1.8.0_25 (Oracle Corporation 25.25-b02)
-OS:           Mac OS X 10.10.2 x86_64
-
-$ groovy -v
-Groovy Version: 2.4.3 JVM: 1.8.0_25 Vendor: Oracle Corporation OS: Mac OS X
-
-$ lazybones help
-Lazybones is a command-line based tool for creating basic software projects from templates.
-
-Available commands:
-
-    create         Creates a new project from a template.
-    config         Displays general help, or help for a specific command.
-    generate       Generates new files in the current project based on a sub-template.
-    list           Lists the templates that are available for you to install.
-    info           Displays information about a template, such as latest version, description, etc.
-    help           Displays general help, or help for a specific command.</pre>
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">...
+dependencies {
+  compile ratpack.dependency("jackson")
+}
+...</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rendering_json_with_jackson">Rendering JSON with Jackson</h3>
+<div class="paragraph">
+<p>Now the tests have been updated to expect a JSON response when <code>/api/:username</code> endpoint is called. Make the necessary changes to the application to make the test pass.</p>
 </div>
 </div>
 </div>
@@ -498,7 +473,7 @@ Available commands:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-04-29 12:43:54 CEST
+Last updated 2015-04-29 12:46:37 CEST
 </div>
 </div>
 </body>
