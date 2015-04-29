@@ -27,3 +27,9 @@ dependencies {
 === Rendering JSON with Jackson
 
 Now the tests have been updated to expect a JSON response when `/api/:username` endpoint is called. Make the necessary changes to the application to make the test pass.
+
+[TIP]
+====
+* http://ratpack.io/manual/current/jackson.html#jackson
+* http://ratpack.io/manual/current/api/ratpack/jackson/Jackson.html#rendering
+====
