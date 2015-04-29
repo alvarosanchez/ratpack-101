@@ -22,7 +22,7 @@ Each handler receives a http://ratpack.io/manual/current/api/ratpack/handling/Co
 
 TIP: Handlers are evaluated and executed in the order they are defined.
 
-Using the skeleton provided, complete the following exercises.
+Using the skeleton provided, work in the `Ratpack.groovy` file to complete the following exercises.
 
 :numbered:
 
@@ -35,6 +35,8 @@ TIP: http://ratpack.io/manual/current/api/ratpack/http/Request.html
 === Responding to a specific path
 
 Define a handler that renders `bar` when a request is sent to `/foo`
+
+TIP: http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#handler-java.lang.String-ratpack.handling.Handler-
 
 === Grouping handlers by path
 
