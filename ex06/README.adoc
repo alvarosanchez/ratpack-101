@@ -1,0 +1,29 @@
+= Ratpack 101
+Alvaro Sanchez-Mariscal <alvaro.sanchezmariscal@gmail.com>
+:toc: left
+:source-highlighter: prettify
+:icons: font
+
+Introductory workshop about http://ratpack.io[Ratpack].
+
+== Using Ratpack modules with Google Guice (20 minutes)
+
+As an optional feature, Ratpack offers you the possibility to enhance your application by using modules powered by Guice.
+
+https://github.com/google/guice[Google Guice] is a dependency injection framework built by Google that allows you to decouple the components of your application by making them reusable parts. Ratpack also offers to you ready to use modules, such as Jackson, H2, Codahale Metrics, Handlebars, etc.
+
+When using Gradle and the Ratpack Gradle plugin, adding a "supported" module is as easy as:
+
+[source,groovy]
+.`build.gradle`
+----
+...
+dependencies {
+  compile ratpack.dependency("jackson")
+}
+...
+----
+
+=== Rendering JSON with Jackson
+
+Now the tests have been updated to expect a JSON response when `/api/:username` endpoint is called. Make the necessary changes to the application to make the test pass.
