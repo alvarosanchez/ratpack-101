@@ -1,0 +1,20 @@
+= Ratpack 101
+Alvaro Sanchez-Mariscal <alvaro.sanchezmariscal@gmail.com>
+:toc: left
+:source-highlighter: prettify
+:icons: font
+
+Introductory workshop about http://ratpack.io[Ratpack].
+
+== Working with the context (20 minutes)
+
+The context is a place where handlers can register objects so that other handlers can get them in a later stage in the chain.
+
+Write the necessary handler chain to make the tests pass.
+
+[TIP]
+====
+* http://ratpack.io/manual/current/context.html#contextual_objects
+* http://ratpack.io/manual/current/api/ratpack/registry/Registry.html
+* http://ratpack.io/manual/current/api/ratpack/registry/Registries.html#just-java.lang.Object-
+====
