@@ -10,7 +10,7 @@ Introductory workshop about http://ratpack.io[Ratpack].
 
 === Unit testing
 
-Unit testing does not require any special infrastructure. Morevover, Ratpack helps you providing a http://ratpack.io/manual/current/api/ratpack/test/handling/RequestFixture.html[`RequestFixture`] which can help you unit testing your handler
+Unit testing does not require any special infrastructure. Moreover, Ratpack helps you providing a http://ratpack.io/manual/current/api/ratpack/test/handling/RequestFixture.html[`RequestFixture`] which can help you unit testing your handler
 
 So, given the `UsernameHandler` implementation, write a Spock unit test specification that tests it with both empty and non-empty strings.
 

@@ -39,4 +39,4 @@ Once you have created the app, let's have a look at it's content:
 * `build.gradle` is the main Gradle build file.
 * `src/main/groovy` is the package root for your Groovy classes (as in all Gradle/Maven applications).
 * `src/ratpack` contains Ratpack specific artifacts. The most important one is `Ratpack.groovy` which contains the Ratpack DSL. If you take a look at it, you will find it similar to the script we created in the previous exercise.
-* `src/test/groovy` will containt your Spock tests.
+* `src/test/groovy` will contain your Spock tests.

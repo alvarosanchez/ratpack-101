@@ -2,7 +2,7 @@
 
 Introductory workshop about http://ratpack.io[Ratpack].
 
-It contains a series of excercises in a set of folders. For each one, you will find a `README.html` file with the exercise instructions. Solution is always inside a `solution` folder.
+It contains a series of exercises in a set of folders. For each one, you will find a `README.html` file with the exercise instructions. Solution is always inside a `solution` folder.
 
 == Software requirements
 

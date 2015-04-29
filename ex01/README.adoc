@@ -33,7 +33,7 @@ Now let's run that. Go to your terminal and run:
 
  $ groovy ratpack.groovy
  
-The first time you run it it might take a while for http://docs.groovy-lang.org/latest/html/documentation/grape.html[Grape] to resolve the dependencies.
+The first time you run it, it might take a while for http://docs.groovy-lang.org/latest/html/documentation/grape.html[Grape] to resolve the dependencies.
 
 TIP: You can use the JVM parameter `-Dgroovy.grape.report.downloads=true` to get output information about dependencies resolution.
 
