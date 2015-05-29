@@ -447,10 +447,29 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_unit_testing">Unit testing</h3>
 <div class="paragraph">
-<p>Unit testing does not require any special infrastructure. Moreover, Ratpack helps you providing a <a href="http://ratpack.io/manual/current/api/ratpack/test/handling/RequestFixture.html"><code>RequestFixture</code></a> which can help you unit testing your handler</p>
+<p>Unit testing does not require any special infrastructure. Moreover, Ratpack helps you providing a <a href="http://ratpack.io/manual/current/api/ratpack/test/handling/RequestFixture.html"><code>RequestFixture</code></a> which can help you unit testing your handler.</p>
 </div>
 <div class="paragraph">
-<p>So, given the <code>UsernameHandler</code> implementation, write a Spock unit test specification that tests it with both empty and non-empty strings.</p>
+<p>It is particularly useful to have handlers in their own class, to be able to test them. For instance, you can use the following code to mock a JSON request to your handler, in a fluent API way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">HandlingResult result = RequestFixture.handle(new MyHandlerImpl()) { RequestFixture fixture -&gt;
+    fixture.body('{"foo":"bar"}', 'application/json').header('X-Auth-Token', 'sdfgdsfgdsfgdfg')
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There are other useful methods in <code>RequestFixture</code>, like <code>method()</code> to specify the HTTP method, <code>registry()</code> to set values on the registry if your handler expects them and <code>uri()</code> and <code>pathBinding()</code> to specify the URL and the parameters in the request.</p>
+</div>
+<div class="paragraph">
+<p>Have a look at the <a href="http://ratpack.io/manual/current/api/ratpack/test/handling/RequestFixture.html">full documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>The returned value is of type <a href="http://ratpack.io/manual/current/api/ratpack/test/handling/HandlingResult.html"><code>HandlingResult</code></a>, on which you can make assertions about the result of the execution of the handler.</p>
+</div>
+<div class="paragraph">
+<p>So, given the <code>UsernameHandler</code> implementation, write a Spock unit test specification (<code>UsernameHandlerSpec</code>) that tests it with both empty and non-empty strings.</p>
 </div>
 <div class="ulist TIP">
 <ul class="TIP">
@@ -492,7 +511,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-04-30 01:27:25 CEST
+Last updated 2015-05-29 17:49:54 CEST
 </div>
 </div>
 </body>

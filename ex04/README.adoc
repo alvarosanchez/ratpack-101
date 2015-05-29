@@ -10,9 +10,24 @@ Introductory workshop about http://ratpack.io[Ratpack].
 
 === Unit testing
 
-Unit testing does not require any special infrastructure. Moreover, Ratpack helps you providing a http://ratpack.io/manual/current/api/ratpack/test/handling/RequestFixture.html[`RequestFixture`] which can help you unit testing your handler
+Unit testing does not require any special infrastructure. Moreover, Ratpack helps you providing a http://ratpack.io/manual/current/api/ratpack/test/handling/RequestFixture.html[`RequestFixture`] which can help you unit testing your handler.
 
-So, given the `UsernameHandler` implementation, write a Spock unit test specification that tests it with both empty and non-empty strings.
+It is particularly useful to have handlers in their own class, to be able to test them. For instance, you can use the following code to mock a JSON request to your handler, in a fluent API way:
+
+[source, groovy]
+----
+HandlingResult result = RequestFixture.handle(new MyHandlerImpl()) { RequestFixture fixture ->
+    fixture.body('{"foo":"bar"}', 'application/json').header('X-Auth-Token', 'sdfgdsfgdsfgdfg')
+}
+----
+
+There are other useful methods in `RequestFixture`, like `method()` to specify the HTTP method, `registry()` to set values on the registry if your handler expects them and `uri()` and `pathBinding()` to specify the URL and the parameters in the request.
+
+Have a look at the http://ratpack.io/manual/current/api/ratpack/test/handling/RequestFixture.html[full documentation].
+
+The returned value is of type http://ratpack.io/manual/current/api/ratpack/test/handling/HandlingResult.html[`HandlingResult`], on which you can make assertions about the result of the execution of the handler.
+
+So, given the `UsernameHandler` implementation, write a Spock unit test specification (`UsernameHandlerSpec`) that tests it with both empty and non-empty strings.
 
 [TIP] 
 * http://ratpack.io/manual/current/api/ratpack/test/handling/RequestFixture.html#handle-ratpack.handling.Handler-ratpack.func.Action-
