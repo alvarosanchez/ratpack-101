@@ -444,16 +444,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">@Grab('io.ratpack:ratpack-groovy:0.9.15')
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">@Grab('io.ratpack:ratpack-groovy:0.9.16')
 import static ratpack.groovy.Groovy.ratpack
 
 ratpack {
     handlers {
-        get {
-            render "Hello World!"
-        }
         get(":name") {
             render "Hello $pathTokens.name!"
+        }
+        get {
+            render "Hello World!"
         }
     }
 }</code></pre>
@@ -493,7 +493,7 @@ You can use the JVM parameter <code>-Dgroovy.grape.report.downloads=true</code> 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-04-29 12:44:26 CEST
+Last updated 2015-05-29 14:23:53 CEST
 </div>
 </div>
 </body>

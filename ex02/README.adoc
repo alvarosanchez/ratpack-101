@@ -14,20 +14,6 @@ Let’s create a Ratpack project in the current directory:
 
  lazybones create ratpack . 
 
-[WARNING]
-====
-The default Ratpack template comes with Spring Loaded 1.2.1 for hot-swapping code changes while the application is running. That version https://github.com/ratpack/ratpack/issues/654[has a bug that it's fixed in the 1.2.3 release]. The new template will be available with the new Ratpack release, but meanwhile, make sure you are using the correct Spring Loaded version:
-
-[source,groovy]
-.build.gradle
-----
-...
-  springloaded "org.springframework:springloaded:1.2.3.RELEASE"
-...
-----
-
-====
-
 After that, you can run the application with Gradle:
 
  ./gradlew run

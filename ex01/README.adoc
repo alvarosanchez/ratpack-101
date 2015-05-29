@@ -12,19 +12,7 @@ The simplest way of creating a Ratpack application is using a Groovy script. Cre
 
 [source,groovy]
 ----
-@Grab('io.ratpack:ratpack-groovy:0.9.15')
-import static ratpack.groovy.Groovy.ratpack
-
-ratpack {
-    handlers {
-        get {
-            render "Hello World!"
-        }
-        get(":name") {
-            render "Hello $pathTokens.name!"
-        }
-    }
-}
+include::solution/ratpack.groovy[]
 ----
 
 What you see there is the Groovy DSL for Ratpack. Those not yet familiar with it, can try to guess what it's defined there: 2 handlers for HTTP GET requests. We will explore handlers later.
