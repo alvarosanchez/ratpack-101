@@ -477,7 +477,18 @@ Ratpack <strong>is not</strong> Servlet API-based, so don&#8217;t expect things 
 </ul>
 </div>
 <div class="paragraph">
-<p>Each handler receives a <a href="http://ratpack.io/manual/current/api/ratpack/handling/Context.html"><code>Context</code></a> object to interact with the <code>request</code>/<code>response</code> objects, the chain, etc.</p>
+<p>Each handler receives a <a href="http://ratpack.io/manual/current/api/ratpack/handling/Context.html"><code>Context</code></a> object to interact with the <code>request</code>/<code>response</code> objects, the chain, etc. All the methods of the <code>Context</code> are automatically available in your <code>Ratpack.groovy</code> DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">ratpack {
+    handlers {
+        handler {
+            response.send("Hello World") //Equivalent to context.response.send("Hello World")
+        }
+    }
+}</code></pre>
+</div>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -486,7 +497,7 @@ Ratpack <strong>is not</strong> Servlet API-based, so don&#8217;t expect things 
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Handlers are evaluated and executed in the order they are defined.
+Handlers are evaluated and executed in the order they are defined. Handlers without path specified should be placed at the bottom of the chain.
 </td>
 </tr>
 </table>
@@ -499,35 +510,34 @@ Handlers are evaluated and executed in the order they are defined.
 <div class="paragraph">
 <p>Define a handler that prints out (<code>println</code>) the requested path, and then delegates to the next handler</p>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<a href="http://ratpack.io/manual/current/api/ratpack/http/Request.html" class="bare">http://ratpack.io/manual/current/api/ratpack/http/Request.html</a>
-</td>
-</tr>
-</table>
+<div class="ulist TIP">
+<ul class="TIP">
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/http/Request.html" class="bare">http://ratpack.io/manual/current/api/ratpack/http/Request.html</a></p>
+</li>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/http/Request.html#getPath--" class="bare">http://ratpack.io/manual/current/api/ratpack/http/Request.html#getPath--</a></p>
+</li>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/handling/Context.html#next--" class="bare">http://ratpack.io/manual/current/api/ratpack/handling/Context.html#next--</a></p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_responding_to_a_specific_path">1.2. Responding to a specific path</h3>
 <div class="paragraph">
-<p>Define a handler that renders <code>bar</code> when a request is sent to <code>/foo</code></p>
+<p>Define a handler that renders <code>"bar"</code> when a request is sent to <code>/foo</code></p>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<a href="http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#handler-java.lang.String-ratpack.handling.Handler-" class="bare">http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#handler-java.lang.String-ratpack.handling.Handler-</a>
-</td>
-</tr>
-</table>
+<div class="ulist TIP">
+<ul class="TIP">
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#handler-java.lang.String-groovy.lang.Closure-" class="bare">http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#handler-java.lang.String-groovy.lang.Closure-</a></p>
+</li>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/handling/Context.html#render-java.lang.Object-" class="bare">http://ratpack.io/manual/current/api/ratpack/handling/Context.html#render-java.lang.Object-</a></p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
@@ -542,7 +552,7 @@ Handlers are evaluated and executed in the order they are defined.
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-<a href="http://ratpack.io/manual/current/api/ratpack/handling/Chain.html#prefix-java.lang.String-ratpack.func.Action-" class="bare">http://ratpack.io/manual/current/api/ratpack/handling/Chain.html#prefix-java.lang.String-ratpack.func.Action-</a>
+<a href="http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#prefix-java.lang.String-groovy.lang.Closure-" class="bare">http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#prefix-java.lang.String-groovy.lang.Closure-</a>
 </td>
 </tr>
 </table>
@@ -562,17 +572,18 @@ Handlers are evaluated and executed in the order they are defined.
 </li>
 </ul>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<a href="http://ratpack.io/manual/current/api/ratpack/handling/Context.html#byMethod-ratpack.func.Action-" class="bare">http://ratpack.io/manual/current/api/ratpack/handling/Context.html#byMethod-ratpack.func.Action-</a>
-</td>
-</tr>
-</table>
+<div class="ulist TIP">
+<ul class="TIP">
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyContext.html#byMethod-groovy.lang.Closure-" class="bare">http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyContext.html#byMethod-groovy.lang.Closure-</a></p>
+</li>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyByMethodSpec.html#get-groovy.lang.Closure-" class="bare">http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyByMethodSpec.html#get-groovy.lang.Closure-</a></p>
+</li>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyByMethodSpec.html#post-groovy.lang.Closure-" class="bare">http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyByMethodSpec.html#post-groovy.lang.Closure-</a></p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
@@ -599,7 +610,7 @@ Handlers are evaluated and executed in the order they are defined.
 <p>For other than simple examples, it is often a good practice to define handlers in their own class under <code>src/groovy</code>.</p>
 </div>
 <div class="paragraph">
-<p>Create a handler for the path <code>/api/now/</code> and respond with a <code>new Date()</code>.</p>
+<p>Create a handler (implementing <code>Handler</code> interface) for the path <code>/api/now/</code> and respond with a <code>new Date()</code>.</p>
 </div>
 <div class="ulist TIP">
 <ul class="TIP">
@@ -618,7 +629,7 @@ Handlers are evaluated and executed in the order they are defined.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-04-30 01:32:55 CEST
+Last updated 2015-05-29 14:05:04 CEST
 </div>
 </div>
 </body>
