@@ -42,17 +42,21 @@ Using the skeleton provided, work in the `Ratpack.groovy` file to complete the f
 Define a handler that prints out (`println`) the requested path, and then delegates to the next handler
 
 [TIP]
+====
 * http://ratpack.io/manual/current/api/ratpack/http/Request.html
 * http://ratpack.io/manual/current/api/ratpack/http/Request.html#getPath--
 * http://ratpack.io/manual/current/api/ratpack/handling/Context.html#next--
+====
 
 === Responding to a specific path
 
 Define a handler that renders `"bar"` when a request is sent to `/foo`
 
 [TIP]
+====
 * http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#handler-java.lang.String-groovy.lang.Closure-
 * http://ratpack.io/manual/current/api/ratpack/handling/Context.html#render-java.lang.Object-
+====
 
 === Grouping handlers by path
 
@@ -68,10 +72,11 @@ Define 2 handlers for the path `/api/methods`:
 * If the request is POST, the response is `POST /api/methods`.
 
 [TIP]
-
+====
 * http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyContext.html#byMethod-groovy.lang.Closure-
 * http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyByMethodSpec.html#get-groovy.lang.Closure-
 * http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyByMethodSpec.html#post-groovy.lang.Closure-
+====
 
 ==== Defining variable parts in the path
 
@@ -86,5 +91,7 @@ For other than simple examples, it is often a good practice to define handlers i
 Create a handler (implementing `Handler` interface) for the path `/api/now/` and respond with a `new Date()`.
 
 [TIP]
+====
 * http://ratpack.io/manual/current/api/ratpack/handling/Handler.html
 * http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#handler-java.lang.String-ratpack.handling.Handler-
+====

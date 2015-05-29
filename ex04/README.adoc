@@ -29,10 +29,12 @@ The returned value is of type http://ratpack.io/manual/current/api/ratpack/test/
 
 So, given the `UsernameHandler` implementation, write a Spock unit test specification (`UsernameHandlerSpec`) that tests it with both empty and non-empty strings.
 
-[TIP] 
+[TIP]
+====
 * http://ratpack.io/manual/current/api/ratpack/test/handling/RequestFixture.html#handle-ratpack.handling.Handler-ratpack.func.Action-
 * http://ratpack.io/manual/current/api/ratpack/test/handling/RequestFixture.html#pathBinding-java.util.Map-
 * http://ratpack.io/manual/current/api/ratpack/test/handling/HandlingResult.html#rendered-java.lang.Class-
+====
 
 === Functional testing
 
