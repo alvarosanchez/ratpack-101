@@ -11,3 +11,6 @@ do
 done
 
 cp README.html index.html 
+git commit -a -m "Updated files"
+git push origin gh-pages
+git checkout master
