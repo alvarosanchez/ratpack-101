@@ -24,6 +24,31 @@ dependencies {
 ...
 ----
 
+Then, you have to add the Jackson module to the binding:
+
+[source,groovy]
+----
+ratpack {
+
+  bindings {
+    add new JacksonModule()
+  }
+
+  handlers {
+    ...
+  }
+}
+----
+
+With the Jackson module, you can benefit from the different ways of reading and writing JSON thanks to the static methods of the http://ratpack.io/manual/current/api/ratpack/jackson/Jackson.html[`Jackson`] class:
+
+[source,groovy]
+----
+handler {
+  render(Jackson.json(foo: 'bar')) // Yields {"foo":"bar"}
+}
+----
+
 === Rendering JSON with Jackson
 
 Now the tests have been updated to expect a JSON response when `/api/:username` endpoint is called. Make the necessary changes to the application to make the test pass.

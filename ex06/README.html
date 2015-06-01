@@ -462,6 +462,33 @@ dependencies {
 ...</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Then, you have to add the Jackson module to the binding:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">ratpack {
+
+  bindings {
+    add new JacksonModule()
+  }
+
+  handlers {
+    ...
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With the Jackson module, you can benefit from the different ways of reading and writing JSON thanks to the static methods of the <a href="http://ratpack.io/manual/current/api/ratpack/jackson/Jackson.html"><code>Jackson</code></a> class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">handler {
+  render(Jackson.json(foo: 'bar')) // Yields {"foo":"bar"}
+}</code></pre>
+</div>
+</div>
 <div class="sect2">
 <h3 id="_rendering_json_with_jackson">Rendering JSON with Jackson</h3>
 <div class="paragraph">
@@ -494,7 +521,7 @@ dependencies {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-04-29 12:52:14 CEST
+Last updated 2015-06-01 12:58:05 CEST
 </div>
 </div>
 </body>
