@@ -4,7 +4,7 @@ Alvaro Sanchez-Mariscal <alvaro.sanchezmariscal@gmail.com>
 :source-highlighter: prettify
 :icons: font
 
-It contains a series of exercises in a set of folders. For each one, you will find a `README.html` file with the exercise instructions. Solution is always inside a `solution` folder.
+Introductory workshop about http://ratpack.io[Ratpack].
 
 == Software requirements
 
@@ -57,6 +57,14 @@ Available commands:
     info           Displays information about a template, such as latest version, description, etc.
     help           Displays general help, or help for a specific command.
 ----
+
+Once done, you can clone this repo:
+
+----
+git clone git@github.com:alvarosanchez/ratpack-101.git
+----
+
+You will find each exercise's template files on each `exNN` folder. Solution is always inside a `solution` folder.
 
 == Acknowledgments
 
