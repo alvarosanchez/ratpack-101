@@ -1,11 +1,3 @@
-= Ratpack 101
-Alvaro Sanchez-Mariscal <alvaro.sanchezmariscal@gmail.com>
-:toc: left
-:source-highlighter: prettify
-:icons: font
-
-Introductory workshop about http://ratpack.io[Ratpack].
-
 == Working with the context (20 minutes)
 
 The context is a place where handlers can register objects so that other handlers can get them in a later stage in the chain.

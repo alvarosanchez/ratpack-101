@@ -1,6 +1,8 @@
 = Ratpack 101
-
-Introductory workshop about http://ratpack.io[Ratpack].
+Alvaro Sanchez-Mariscal <alvaro.sanchezmariscal@gmail.com>
+:toc: left
+:source-highlighter: prettify
+:icons: font
 
 It contains a series of exercises in a set of folders. For each one, you will find a `README.html` file with the exercise instructions. Solution is always inside a `solution` folder.
 
@@ -59,3 +61,17 @@ Available commands:
 == Acknowledgments
 
 * https://github.com/reanag[Andrea Nagy] for her valuable feedback about this workshop.
+
+:numbered:
+
+include::ex01/README.adoc[]
+
+include::ex02/README.adoc[]
+
+include::ex03/README.adoc[]
+
+include::ex04/README.adoc[]
+
+include::ex05/README.adoc[]
+
+include::ex06/README.adoc[]

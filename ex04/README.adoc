@@ -1,11 +1,3 @@
-= Ratpack 101
-Alvaro Sanchez-Mariscal <alvaro.sanchezmariscal@gmail.com>
-:toc: left
-:source-highlighter: prettify
-:icons: font
-
-Introductory workshop about http://ratpack.io[Ratpack].
-
 == Testing Ratpack applications with Spock (20 minutes)
 
 === Unit testing

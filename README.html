@@ -5,6 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.2">
+<meta name="author" content="Alvaro Sanchez-Mariscal">
 <title>Ratpack 101</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 <style>
@@ -408,17 +409,54 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .hide-for-print{display:none!important}
 .show-for-print{display:inherit!important}}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+<script>document.addEventListener('DOMContentLoaded', prettyPrint)</script>
 </head>
-<body class="article">
+<body class="article toc2 toc-left">
 <div id="header">
 <h1>Ratpack 101</h1>
+<div class="details">
+<span id="author" class="author">Alvaro Sanchez-Mariscal</span><br>
+<span id="email" class="email"><a href="mailto:alvaro.sanchezmariscal@gmail.com">alvaro.sanchezmariscal@gmail.com</a></span><br>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_software_requirements">Software requirements</a></li>
+<li><a href="#_acknowledgments">Acknowledgments</a></li>
+<li><a href="#_hello_world_using_a_groovy_script_15_minutes">1. Hello World using a Groovy script (15 minutes)</a></li>
+<li><a href="#_creating_ratpack_projects_with_lazybones_and_running_them_with_gradle_10_minutes">2. Creating Ratpack projects with Lazybones and running them with Gradle (10 minutes)</a>
+<ul class="sectlevel2">
+<li><a href="#_examining_the_project_layout_5_minutes">2.1. Examining the project layout (5 minutes)</a></li>
+</ul>
+</li>
+<li><a href="#_working_with_handlers_30_minutes">3. Working with handlers (30 minutes)</a>
+<ul class="sectlevel2">
+<li><a href="#_delegating_to_the_next_handler">3.1. Delegating to the next handler</a></li>
+<li><a href="#_responding_to_a_specific_path">3.2. Responding to a specific path</a></li>
+<li><a href="#_grouping_handlers_by_path">3.3. Grouping handlers by path</a></li>
+</ul>
+</li>
+<li><a href="#_testing_ratpack_applications_with_spock_20_minutes">4. Testing Ratpack applications with Spock (20 minutes)</a>
+<ul class="sectlevel2">
+<li><a href="#_unit_testing">4.1. Unit testing</a></li>
+<li><a href="#_functional_testing">4.2. Functional testing</a></li>
+</ul>
+</li>
+<li><a href="#_working_with_the_context_20_minutes">5. Working with the context (20 minutes)</a></li>
+<li><a href="#_using_ratpack_modules_with_google_guice_20_minutes">6. Using Ratpack modules with Google Guice (20 minutes)</a>
+<ul class="sectlevel2">
+<li><a href="#_rendering_json_with_jackson">6.1. Rendering JSON with Jackson</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph">
-<p>Introductory workshop about <a href="http://ratpack.io">Ratpack</a>.</p>
-</div>
 <div class="paragraph">
 <p>It contains a series of exercises in a set of folders. For each one, you will find a <code>README.html</code> file with the exercise instructions. Solution is always inside a <code>solution</code> folder.</p>
 </div>
@@ -507,10 +545,578 @@ Available commands:
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_hello_world_using_a_groovy_script_15_minutes">1. Hello World using a Groovy script (15 minutes)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The simplest way of creating a Ratpack application is using a Groovy script. Create a file named <code>ratpack.groovy</code> with the following content:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">@Grab('io.ratpack:ratpack-groovy:0.9.16')
+import static ratpack.groovy.Groovy.ratpack
+
+ratpack {
+    handlers {
+        get(":name") {
+            render "Hello $pathTokens.name!"
+        }
+        get {
+            render "Hello World!"
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>What you see there is the Groovy DSL for Ratpack. Those not yet familiar with it, can try to guess what it&#8217;s defined there: 2 handlers for HTTP GET requests. We will explore handlers later.</p>
+</div>
+<div class="paragraph">
+<p>Now let&#8217;s run that. Go to your terminal and run:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ groovy ratpack.groovy</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The first time you run it, it might take a while for <a href="http://docs.groovy-lang.org/latest/html/documentation/grape.html">Grape</a> to resolve the dependencies.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can use the JVM parameter <code>-Dgroovy.grape.report.downloads=true</code> to get output information about dependencies resolution.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Once it has finished, you can point your browser to <a href="http://localhost:5050" class="bare">http://localhost:5050</a> or <a href="http://localhost:5050/Spring%20IO" class="bare">http://localhost:5050/Spring%20IO</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_creating_ratpack_projects_with_lazybones_and_running_them_with_gradle_10_minutes">2. Creating Ratpack projects with Lazybones and running them with Gradle (10 minutes)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/pledbrook/lazybones">Lazybones</a> is a scaffolding tool to generate application skeletons for different projects, and it&#8217;s the recommended option for bootstrapping a Ratpack application.</p>
+</div>
+<div class="paragraph">
+<p>Let’s create a Ratpack project in the current directory:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>lazybones create ratpack .</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After that, you can run the application with Gradle:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>./gradlew run</pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examining_the_project_layout_5_minutes">2.1. Examining the project layout (5 minutes)</h3>
+<div class="paragraph">
+<p>Once you have created the app, let&#8217;s have a look at it&#8217;s content:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>build.gradle</code> is the main Gradle build file.</p>
+</li>
+<li>
+<p><code>src/main/groovy</code> is the package root for your Groovy classes (as in all Gradle/Maven applications).</p>
+</li>
+<li>
+<p><code>src/ratpack</code> contains Ratpack specific artifacts. The most important one is <code>Ratpack.groovy</code> which contains the Ratpack DSL. If you take a look at it, you will find it similar to the script we created in the previous exercise.</p>
+</li>
+<li>
+<p><code>src/test/groovy</code> will contain your Spock tests.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_working_with_handlers_30_minutes">3. Working with handlers (30 minutes)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ratpack is built on top of <a href="http://netty.io/">Netty</a>, a non-blocking HTTP server. Once the Ratpack server is started, it will listen for incoming requests, and for each, will execute all the handlers defined in the handler chain.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Ratpack <strong>is not</strong> Servlet API-based, so don&#8217;t expect things <code>HttpServletRequest</code> or <code>HttpSession</code>. However, you can think of handlers as a mix of a Servlet and a Filter.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Handlers are functions composed in a handler chain. A handler can do one of the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Respond to the request.</p>
+</li>
+<li>
+<p>Delegate to the next handler in the chain.</p>
+</li>
+<li>
+<p>Insert more handlers in the chain and delegate to them.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each handler receives a <a href="http://ratpack.io/manual/current/api/ratpack/handling/Context.html"><code>Context</code></a> object to interact with the <code>request</code>/<code>response</code> objects, the chain, etc. All the methods of the <code>Context</code> are automatically available in your <code>Ratpack.groovy</code> DSL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">ratpack {
+    handlers {
+        handler {
+            response.send("Hello World") //Equivalent to context.response.send("Hello World")
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Handlers are evaluated and executed in the order they are defined. Handlers without path specified should be placed at the bottom of the chain.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Using the skeleton provided, work in the <code>Ratpack.groovy</code> file to complete the following exercises.</p>
+</div>
+<div class="sect2">
+<h3 id="_delegating_to_the_next_handler">3.1. Delegating to the next handler</h3>
+<div class="paragraph">
+<p>Define a handler that prints out (<code>println</code>) the requested path, and then delegates to the next handler</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/http/Request.html" class="bare">http://ratpack.io/manual/current/api/ratpack/http/Request.html</a></p>
+</li>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/http/Request.html#getPath--" class="bare">http://ratpack.io/manual/current/api/ratpack/http/Request.html#getPath--</a></p>
+</li>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/handling/Context.html#next--" class="bare">http://ratpack.io/manual/current/api/ratpack/handling/Context.html#next--</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_responding_to_a_specific_path">3.2. Responding to a specific path</h3>
+<div class="paragraph">
+<p>Define a handler that renders <code>"bar"</code> when a request is sent to <code>/foo</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#handler-java.lang.String-groovy.lang.Closure-" class="bare">http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#handler-java.lang.String-groovy.lang.Closure-</a></p>
+</li>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/handling/Context.html#render-java.lang.Object-" class="bare">http://ratpack.io/manual/current/api/ratpack/handling/Context.html#render-java.lang.Object-</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_grouping_handlers_by_path">3.3. Grouping handlers by path</h3>
+<div class="paragraph">
+<p>Define the next handlers nested in the path <code>/api</code>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<a href="http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#prefix-java.lang.String-groovy.lang.Closure-" class="bare">http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#prefix-java.lang.String-groovy.lang.Closure-</a>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_group_handlers_by_http_method">3.3.1. Group handlers by HTTP method</h4>
+<div class="paragraph">
+<p>Define 2 handlers for the path <code>/api/methods</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If the request is GET, the response is <code>GET /api/methods</code>.</p>
+</li>
+<li>
+<p>If the request is POST, the response is <code>POST /api/methods</code>.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyContext.html#byMethod-groovy.lang.Closure-" class="bare">http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyContext.html#byMethod-groovy.lang.Closure-</a></p>
+</li>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyByMethodSpec.html#get-groovy.lang.Closure-" class="bare">http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyByMethodSpec.html#get-groovy.lang.Closure-</a></p>
+</li>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyByMethodSpec.html#post-groovy.lang.Closure-" class="bare">http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyByMethodSpec.html#post-groovy.lang.Closure-</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_defining_variable_parts_in_the_path">3.3.2. Defining variable parts in the path</h4>
+<div class="paragraph">
+<p>Define a handler for the path <code>/api/&lt;USERNAME&gt;</code>, where <code>&lt;USERNAME&gt;</code> can be any String. The response must be <code>Hello, &lt;USERNAME&gt;</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<a href="http://ratpack.io/manual/current/api/ratpack/handling/Context.html#getPathTokens--" class="bare">http://ratpack.io/manual/current/api/ratpack/handling/Context.html#getPathTokens--</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_defining_handlers_in_it_s_own_class">3.3.3. Defining handlers in it&#8217;s own class</h4>
+<div class="paragraph">
+<p>For other than simple examples, it is often a good practice to define handlers in their own class under <code>src/groovy</code>.</p>
+</div>
+<div class="paragraph">
+<p>Create a handler (implementing <code>Handler</code> interface) for the path <code>/api/now/</code> and respond with a <code>new Date()</code>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/handling/Handler.html" class="bare">http://ratpack.io/manual/current/api/ratpack/handling/Handler.html</a></p>
+</li>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#handler-java.lang.String-ratpack.handling.Handler-" class="bare">http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#handler-java.lang.String-ratpack.handling.Handler-</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_testing_ratpack_applications_with_spock_20_minutes">4. Testing Ratpack applications with Spock (20 minutes)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_unit_testing">4.1. Unit testing</h3>
+<div class="paragraph">
+<p>Unit testing does not require any special infrastructure. Moreover, Ratpack helps you providing a <a href="http://ratpack.io/manual/current/api/ratpack/test/handling/RequestFixture.html"><code>RequestFixture</code></a> which can help you unit testing your handler.</p>
+</div>
+<div class="paragraph">
+<p>It is particularly useful to have handlers in their own class, to be able to test them. For instance, you can use the following code to mock a JSON request to your handler, in a fluent API way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">HandlingResult result = RequestFixture.handle(new MyHandlerImpl()) { RequestFixture fixture -&gt;
+    fixture.body('{"foo":"bar"}', 'application/json').header('X-Auth-Token', 'sdfgdsfgdsfgdfg')
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There are other useful methods in <code>RequestFixture</code>, like <code>method()</code> to specify the HTTP method, <code>registry()</code> to set values on the registry if your handler expects them and <code>uri()</code> and <code>pathBinding()</code> to specify the URL and the parameters in the request.</p>
+</div>
+<div class="paragraph">
+<p>Have a look at the <a href="http://ratpack.io/manual/current/api/ratpack/test/handling/RequestFixture.html">full documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>The returned value is of type <a href="http://ratpack.io/manual/current/api/ratpack/test/handling/HandlingResult.html"><code>HandlingResult</code></a>, on which you can make assertions about the result of the execution of the handler.</p>
+</div>
+<div class="paragraph">
+<p>So, given the <code>UsernameHandler</code> implementation, write a Spock unit test specification (<code>UsernameHandlerSpec</code>) that tests it with both empty and non-empty strings.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/test/handling/RequestFixture.html#handle-ratpack.handling.Handler-ratpack.func.Action-" class="bare">http://ratpack.io/manual/current/api/ratpack/test/handling/RequestFixture.html#handle-ratpack.handling.Handler-ratpack.func.Action-</a></p>
+</li>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/test/handling/RequestFixture.html#pathBinding-java.util.Map-" class="bare">http://ratpack.io/manual/current/api/ratpack/test/handling/RequestFixture.html#pathBinding-java.util.Map-</a></p>
+</li>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/test/handling/HandlingResult.html#rendered-java.lang.Class-" class="bare">http://ratpack.io/manual/current/api/ratpack/test/handling/HandlingResult.html#rendered-java.lang.Class-</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_functional_testing">4.2. Functional testing</h3>
+<div class="paragraph">
+<p>Functional testing in the context of a Ratpack app means to spin up a server instance, use an HTTP client to send requests and set assertions on the response received.</p>
+</div>
+<div class="paragraph">
+<p>To make Ratpack start the application your tests, and to get an HTTP client, you can define the following attributes in your specification class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">@Shared ApplicationUnderTest aut = new GroovyRatpackMainApplicationUnderTest()
+@Delegate TestHttpClient testClient = aut.httpClient</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that by using Groovy&#8217;s <code>@Delegate</code> annotation, all the methods of the <a href="http://ratpack.io/manual/current/api/ratpack/http/client/HttpClient.html">HTTP Client</a> are available in your specification.</p>
+</div>
+<div class="paragraph">
+<p>For this exercise, write a Spock specification (<code>ApplicationSpec</code>) that tests all the handlers defined in the chain DSL (<code>Ratpack.groovy</code>).</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<a href="http://ratpack.io/manual/current/testing.html#functional_testing" class="bare">http://ratpack.io/manual/current/testing.html#functional_testing</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_working_with_the_context_20_minutes">5. Working with the context (20 minutes)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The context is a place where handlers can register objects so that other handlers can get them in a later stage in the chain.</p>
+</div>
+<div class="paragraph">
+<p>To build a <a href="http://ratpack.io/manual/current/api/ratpack/registry/Registry.html"><code>Registry</code></a>, you can use the methods in the <a href="http://ratpack.io/manual/current/api/ratpack/registry/Registries.html"><code>Registries</code></a> class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">handler {
+    //Builds a registry builder and adds 2 objects to it
+    Registry registry = Registries.registry().add(MyService, new MyServiceImpl()).add('String instance').build()
+    next(registry)
+}
+
+handler('foo') {
+    assert context.get(MyService) instanceof MyServiceImpl
+    assert context.get(String) == 'String instance'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sometimes you just need to pass a single object to downstream handlers. Note also that alternatively, you can get access registry object by defining them as the closure argument of the handler:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">handler {
+    String token = request.headers.get('X-Auth-Token')
+    next(just(token))
+}
+
+handler('foo') {
+    String token = context.get(String)
+    doWhatEver(token)
+}
+
+handler('bar') { String token -&gt;
+    doWhatEver(token)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For this exercise, write the necessary handler chain in <code>Ratpack.groovy</code> to make all the tests pass.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://ratpack.io/manual/current/context.html#contextual_objects" class="bare">http://ratpack.io/manual/current/context.html#contextual_objects</a></p>
+</li>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/registry/Registry.html" class="bare">http://ratpack.io/manual/current/api/ratpack/registry/Registry.html</a></p>
+</li>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/registry/Registries.html#just-java.lang.Object-" class="bare">http://ratpack.io/manual/current/api/ratpack/registry/Registries.html#just-java.lang.Object-</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_using_ratpack_modules_with_google_guice_20_minutes">6. Using Ratpack modules with Google Guice (20 minutes)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As an optional feature, Ratpack offers you the possibility to enhance your application by using modules powered by Guice.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/google/guice">Google Guice</a> is a dependency injection framework built by Google that allows you to decouple the components of your application by making them reusable parts. Ratpack also offers to you ready to use modules, such as Jackson, H2, Codahale Metrics, Handlebars, etc.</p>
+</div>
+<div class="paragraph">
+<p>When using Gradle and the Ratpack Gradle plugin, adding a "supported" module is as easy as:</p>
+</div>
+<div class="listingblock">
+<div class="title"><code>build.gradle</code></div>
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">...
+dependencies {
+  compile ratpack.dependency("jackson")
+}
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, you have to add the Jackson module to the binding:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">ratpack {
+
+  bindings {
+    add new JacksonModule()
+  }
+
+  handlers {
+    ...
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With the Jackson module, you can benefit from the different ways of reading and writing JSON thanks to the static methods of the <a href="http://ratpack.io/manual/current/api/ratpack/jackson/Jackson.html"><code>Jackson</code></a> class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">handler {
+  render(Jackson.json(foo: 'bar')) // Yields {"foo":"bar"}
+}</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rendering_json_with_jackson">6.1. Rendering JSON with Jackson</h3>
+<div class="paragraph">
+<p>Now the tests have been updated to expect a JSON response when <code>/api/:username</code> endpoint is called. Make the necessary changes to the application to make the test pass.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://ratpack.io/manual/current/jackson.html#jackson" class="bare">http://ratpack.io/manual/current/jackson.html#jackson</a></p>
+</li>
+<li>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/jackson/Jackson.html#rendering" class="bare">http://ratpack.io/manual/current/api/ratpack/jackson/Jackson.html#rendering</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-04-30 01:39:07 CEST
+Last updated 2015-06-01 13:11:26 CEST
 </div>
 </div>
 </body>

@@ -1,11 +1,3 @@
-= Ratpack 101
-Alvaro Sanchez-Mariscal <alvaro.sanchezmariscal@gmail.com>
-:toc: left
-:source-highlighter: prettify
-:icons: font
-
-Introductory workshop about http://ratpack.io[Ratpack].
-
 == Using Ratpack modules with Google Guice (20 minutes)
 
 As an optional feature, Ratpack offers you the possibility to enhance your application by using modules powered by Guice.

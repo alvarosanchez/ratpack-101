@@ -1,11 +1,3 @@
-= Ratpack 101
-Alvaro Sanchez-Mariscal <alvaro.sanchezmariscal@gmail.com>
-:toc: left
-:source-highlighter: prettify
-:icons: font
-
-Introductory workshop about http://ratpack.io[Ratpack].
-
 == Working with handlers (30 minutes)
 
 Ratpack is built on top of http://netty.io/[Netty], a non-blocking HTTP server. Once the Ratpack server is started, it will listen for incoming requests, and for each, will execute all the handlers defined in the handler chain.

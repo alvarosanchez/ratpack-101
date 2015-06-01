@@ -1,11 +1,3 @@
-= Ratpack 101
-Alvaro Sanchez-Mariscal <alvaro.sanchezmariscal@gmail.com>
-:toc: left
-:source-highlighter: prettify
-:icons: font
-
-Introductory workshop about http://ratpack.io[Ratpack].
-
 == Creating Ratpack projects with Lazybones and running them with Gradle (10 minutes)
 
 https://github.com/pledbrook/lazybones[Lazybones] is a scaffolding tool to generate application skeletons for different projects, and it's the recommended option for bootstrapping a Ratpack application.
@@ -18,7 +10,7 @@ After that, you can run the application with Gradle:
 
  ./gradlew run
 
-== Examining the project layout (5 minutes)
+=== Examining the project layout (5 minutes)
 
 Once you have created the app, let's have a look at it's content:
 
