@@ -40,6 +40,16 @@ So, given the `UsernameHandler` implementation, write a Spock unit test specific
 
 Functional testing in the context of a Ratpack app means to spin up a server instance, use an HTTP client to send requests and set assertions on the response received.
 
-For this exercise, write a Spock specification that tests all the handlers defined in the chain (note that in the context of a functional test, logging written on the server side is not possible to test).
+To make Ratpack start the application your tests, and to get an HTTP client, you can define the following attributes in your specification class:
+
+[source,groovy]
+----
+@Shared ApplicationUnderTest aut = new GroovyRatpackMainApplicationUnderTest()
+@Delegate TestHttpClient testClient = aut.httpClient
+----
+
+Note that by using Groovy's `@Delegate` annotation, all the methods of the http://ratpack.io/manual/current/api/ratpack/http/client/HttpClient.html[HTTP Client] are available in your specification.
+
+For this exercise, write a Spock specification (`ApplicationSpec`) that tests all the handlers defined in the chain DSL (`Ratpack.groovy`).
 
 TIP: http://ratpack.io/manual/current/testing.html#functional_testing

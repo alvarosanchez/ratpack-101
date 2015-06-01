@@ -502,7 +502,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Functional testing in the context of a Ratpack app means to spin up a server instance, use an HTTP client to send requests and set assertions on the response received.</p>
 </div>
 <div class="paragraph">
-<p>For this exercise, write a Spock specification that tests all the handlers defined in the chain (note that in the context of a functional test, logging written on the server side is not possible to test).</p>
+<p>To make Ratpack start the application your tests, and to get an HTTP client, you can define the following attributes in your specification class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">@Shared ApplicationUnderTest aut = new GroovyRatpackMainApplicationUnderTest()
+@Delegate TestHttpClient testClient = aut.httpClient</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that by using Groovy&#8217;s <code>@Delegate</code> annotation, all the methods of the <a href="http://ratpack.io/manual/current/api/ratpack/http/client/HttpClient.html">HTTP Client</a> are available in your specification.</p>
+</div>
+<div class="paragraph">
+<p>For this exercise, write a Spock specification (<code>ApplicationSpec</code>) that tests all the handlers defined in the chain DSL (<code>Ratpack.groovy</code>).</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -522,7 +534,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-05-29 17:52:27 CEST
+Last updated 2015-06-01 11:54:51 CEST
 </div>
 </div>
 </body>
