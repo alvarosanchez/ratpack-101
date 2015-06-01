@@ -443,7 +443,44 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>The context is a place where handlers can register objects so that other handlers can get them in a later stage in the chain.</p>
 </div>
 <div class="paragraph">
-<p>Write the necessary handler chain to make the tests pass.</p>
+<p>To build a <a href="http://ratpack.io/manual/current/api/ratpack/registry/Registry.html"><code>Registry</code></a>, you can use the methods in the <a href="http://ratpack.io/manual/current/api/ratpack/registry/Registries.html"><code>Registries</code></a> class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">handler {
+    //Builds a registry builder and adds 2 objects to it
+    Registry registry = Registries.registry().add(MyService, new MyServiceImpl()).add('String instance').build()
+    next(registry)
+}
+
+handler('foo') {
+    assert context.get(MyService) instanceof MyServiceImpl
+    assert context.get(String) == 'String instance'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sometimes you just need to pass a single object to downstream handlers. Note also that alternatively, you can get access registry object by defining them as the closure argument of the handler:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">handler {
+    String token = request.headers.get('X-Auth-Token')
+    next(just(token))
+}
+
+handler('foo') {
+    String token = context.get(String)
+    doWhatEver(token)
+}
+
+handler('bar') { String token -&gt;
+    doWhatEver(token)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For this exercise, write the necessary handler chain in <code>Ratpack.groovy</code> to make all the tests pass.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -474,7 +511,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-04-28 21:57:36 CEST
+Last updated 2015-06-01 12:17:42 CEST
 </div>
 </div>
 </body>

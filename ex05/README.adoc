@@ -10,7 +10,42 @@ Introductory workshop about http://ratpack.io[Ratpack].
 
 The context is a place where handlers can register objects so that other handlers can get them in a later stage in the chain.
 
-Write the necessary handler chain to make the tests pass.
+To build a http://ratpack.io/manual/current/api/ratpack/registry/Registry.html[`Registry`], you can use the methods in the http://ratpack.io/manual/current/api/ratpack/registry/Registries.html[`Registries`] class:
+
+[source, groovy]
+----
+handler {
+    //Builds a registry builder and adds 2 objects to it
+    Registry registry = Registries.registry().add(MyService, new MyServiceImpl()).add('String instance').build()
+    next(registry)
+}
+
+handler('foo') {
+    assert context.get(MyService) instanceof MyServiceImpl
+    assert context.get(String) == 'String instance'
+}
+----
+
+Sometimes you just need to pass a single object to downstream handlers. Note also that alternatively, you can get access registry object by defining them as the closure argument of the handler:
+
+[source, groovy]
+----
+handler {
+    String token = request.headers.get('X-Auth-Token')
+    next(just(token))
+}
+
+handler('foo') {
+    String token = context.get(String)
+    doWhatEver(token)
+}
+
+handler('bar') { String token ->
+    doWhatEver(token)    
+}
+----
+
+For this exercise, write the necessary handler chain in `Ratpack.groovy` to make all the tests pass.
 
 [TIP]
 ====
