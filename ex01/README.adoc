@@ -17,4 +17,4 @@ The first time you run it, it might take a while for http://docs.groovy-lang.org
 
 TIP: You can use the JVM parameter `-Dgroovy.grape.report.downloads=true` to get output information about dependencies resolution.
 
-Once it has finished, you can point your browser to http://localhost:5050 or http://localhost:5050/Spring%20IO
+Once it has finished, you can point your browser to http://localhost:5050 or http://localhost:5050/GR8Conf
