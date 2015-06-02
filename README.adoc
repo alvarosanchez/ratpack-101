@@ -73,6 +73,7 @@ You will find each exercise's template files on each `exNN` folder. Solution is 
 == Acknowledgments
 
 * https://github.com/reanag[Andrea Nagy] for her valuable feedback about this workshop.
+* https://github.com/jetztgradnet[Wolfgang Schell] for improvements to this guide.
 
 :numbered:
 
