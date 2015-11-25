@@ -1,47 +1,37 @@
-import org.example.ratpack.NowHandler
-
 import static ratpack.groovy.Groovy.ratpack
+
+import org.example.ratpack.NowHandler
 
 ratpack {
   handlers {
 
-    handler {
+    all {
       println request.uri
       next()
     }
 
-    handler('foo') {
-      render 'bar'
+    path('foo') {
+      render "bar"
     }
 
     prefix('api') {
-
-      handler('methods') {
-
+      path('methods') {
         byMethod {
-
           get {
             render "GET /api/methods"
           }
-
           post {
             render "POST /api/methods"
           }
-
         }
       }
 
-      handler('now', new NowHandler())
+      path('now', new NowHandler())
 
-      handler(':username') {
-
-        render "Hello, $pathTokens.username"
-
+      path(':username') {
+        render "Hello $pathTokens.username"
       }
-
     }
-
-
 
   }
 }

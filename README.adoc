@@ -16,7 +16,7 @@ Make sure you have:
 
 * JDK 8 (both in command line and in your IDE).
 * Git.
-* Gradle.
+* Gradle 2.6.
 * Groovy 2.4.1+ (on the command line)
 * Lazybones installed via http://gvmtool.net/[GVM].
 
@@ -34,7 +34,7 @@ git version 2.3.2
 $ gradle -v
 
 ------------------------------------------------------------
-Gradle 2.3
+Gradle 2.6
 ------------------------------------------------------------
 
 Build time:   2015-02-16 05:09:33 UTC
@@ -74,6 +74,7 @@ You will find each exercise's template files on each `exNN` folder. Solution is 
 
 * https://github.com/reanag[Andrea Nagy] for her valuable feedback about this workshop.
 * https://github.com/jetztgradnet[Wolfgang Schell] for improvements to this guide.
+* https://github.com/aldrinm[Aldrin Misquitta] for the upgrade to Ratpack 1.0
 
 :numbered:
 

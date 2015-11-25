@@ -1,4 +1,4 @@
-@Grab('io.ratpack:ratpack-groovy:0.9.16')
+@Grab('io.ratpack:ratpack-groovy:1.0.0')
 import static ratpack.groovy.Groovy.ratpack
 
 ratpack {
