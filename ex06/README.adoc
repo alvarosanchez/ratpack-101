@@ -1,5 +1,8 @@
 == Using Ratpack modules with Google Guice (20 minutes)
 
+NOTE: The `ratpack-jackson-guice` library was removed from http://ratpack.io/versions/1.0.0-rc-1[1.0.0 RC-1] onwards and the functionality is now part of `ratpack-core`. This exercise probably needs an update to use a current Ratpack module.
+However, this is a good exercise for JSON handling.
+
 As an optional feature, Ratpack offers you the possibility to enhance your application by using modules powered by Guice.
 
 https://github.com/google/guice[Google Guice] is a dependency injection framework built by Google that allows you to decouple the components of your application by making them reusable parts. Ratpack also offers to you ready to use modules, such as Jackson, H2, Codahale Metrics, Handlebars, etc.

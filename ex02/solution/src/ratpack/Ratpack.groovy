@@ -5,7 +5,7 @@ import static ratpack.groovy.Groovy.ratpack
 
 ratpack {
   bindings {
-    add MarkupTemplateModule
+    module MarkupTemplateModule
   }
 
   handlers {
@@ -13,6 +13,6 @@ ratpack {
       render groovyMarkupTemplate("index.gtpl", title: "My Ratpack App")
     }
 
-    assets "public"
+    files { dir "public" }
   }
 }
