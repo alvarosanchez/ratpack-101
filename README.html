@@ -478,7 +478,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Git.</p>
 </li>
 <li>
-<p>Gradle.</p>
+<p>Gradle 2.6.</p>
 </li>
 <li>
 <p>Groovy 2.4.1+ (on the command line)</p>
@@ -504,7 +504,7 @@ git version 2.3.2
 $ gradle -v
 
 ------------------------------------------------------------
-Gradle 2.3
+Gradle 2.6
 ------------------------------------------------------------
 
 Build time:   2015-02-16 05:09:33 UTC
@@ -556,6 +556,9 @@ Available commands:
 <li>
 <p><a href="https://github.com/jetztgradnet">Wolfgang Schell</a> for improvements to this guide.</p>
 </li>
+<li>
+<p><a href="https://github.com/aldrinm">Aldrin Misquitta</a> for the upgrade to Ratpack 1.0</p>
+</li>
 </ul>
 </div>
 </div>
@@ -568,7 +571,7 @@ Available commands:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">@Grab('io.ratpack:ratpack-groovy:0.9.16')
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">@Grab('io.ratpack:ratpack-groovy:1.0.0')
 import static ratpack.groovy.Groovy.ratpack
 
 ratpack {
@@ -1053,6 +1056,19 @@ handler('bar') { String token -&gt;
 <div class="sect1">
 <h2 id="_using_ratpack_modules_with_google_guice_20_minutes">6. Using Ratpack modules with Google Guice (20 minutes)</h2>
 <div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>ratpack-jackson-guice</code> library was removed from <a href="http://ratpack.io/versions/1.0.0-rc-1">1.0.0 RC-1</a> onwards and the functionality is now part of <code>ratpack-core</code>. This exercise probably needs an update to use a current Ratpack module.
+However, this is a good exercise for JSON handling.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>As an optional feature, Ratpack offers you the possibility to enhance your application by using modules powered by Guice.</p>
 </div>
@@ -1131,7 +1147,7 @@ dependencies {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-06-02 10:10:43 CEST
+Last updated 2015-11-25 13:44:05 CET
 </div>
 </div>
 </body>
