@@ -1,5 +1,7 @@
 == Testing Ratpack applications with Spock (20 minutes)
 
+Write the following tests as specified under `src/test/groovy`. To run them, you can just run `./gradlew clean test`
+
 === Unit testing
 
 Unit testing does not require any special infrastructure. Moreover, Ratpack helps you providing a http://ratpack.io/manual/current/api/ratpack/test/handling/RequestFixture.html[`RequestFixture`] which can help you unit testing your handler.
