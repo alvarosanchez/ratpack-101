@@ -479,7 +479,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Git.</p>
 </li>
 <li>
-<p>Gradle 2.6.</p>
+<p>Gradle 2.6+.</p>
 </li>
 <li>
 <p>Groovy 2.4.1+ (on the command line)</p>
@@ -494,10 +494,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ java -version
-java version "1.8.0_25"
-Java(TM) SE Runtime Environment (build 1.8.0_25-b17)
-Java HotSpot(TM) 64-Bit Server VM (build 25.25-b02, mixed mode)
+<pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">$ java -version
+java version "1.8.0_60"
+Java(TM) SE Runtime Environment (build 1.8.0_60-b27)
+Java HotSpot(TM) 64-Bit Server VM (build 25.60-b23, mixed mode)
 
 $ git --version
 git version 2.3.2
@@ -505,20 +505,20 @@ git version 2.3.2
 $ gradle -v
 
 ------------------------------------------------------------
-Gradle 2.6
+Gradle 2.9
 ------------------------------------------------------------
 
-Build time:   2015-02-16 05:09:33 UTC
+Build time:   2015-11-17 07:02:17 UTC
 Build number: none
-Revision:     586be72bf6e3df1ee7676d1f2a3afd9157341274
+Revision:     b463d7980c40d44c4657dc80025275b84a29e31f
 
-Groovy:       2.3.9
+Groovy:       2.4.4
 Ant:          Apache Ant(TM) version 1.9.3 compiled on December 23 2013
-JVM:          1.8.0_25 (Oracle Corporation 25.25-b02)
-OS:           Mac OS X 10.10.2 x86_64
+JVM:          1.8.0_60 (Oracle Corporation 25.60-b23)
+OS:           Mac OS X 10.11.1 x86_64
 
 $ groovy -v
-Groovy Version: 2.4.3 JVM: 1.8.0_25 Vendor: Oracle Corporation OS: Mac OS X
+Groovy Version: 2.4.5 JVM: 1.8.0_60 Vendor: Oracle Corporation OS: Mac OS X
 
 $ lazybones help
 Lazybones is a command-line based tool for creating basic software projects from templates.
@@ -530,7 +530,7 @@ Available commands:
     generate       Generates new files in the current project based on a sub-template.
     list           Lists the templates that are available for you to install.
     info           Displays information about a template, such as latest version, description, etc.
-    help           Displays general help, or help for a specific command.</pre>
+    help           Displays general help, or help for a specific command.</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1145,24 +1145,13 @@ handler('bar') { String token -&gt;
 <div class="sect1">
 <h2 id="_using_ratpack_modules_with_google_guice_20_minutes">6. Using Ratpack modules with Google Guice (20 minutes)</h2>
 <div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The <code>ratpack-jackson-guice</code> library was removed from <a href="http://ratpack.io/versions/1.0.0-rc-1">1.0.0 RC-1</a> onwards and the functionality is now part of <code>ratpack-core</code>. This exercise probably needs an update to use a current Ratpack module.
-However, this is a good exercise for JSON handling.
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>As an optional feature, Ratpack offers you the possibility to enhance your application by using modules powered by Guice.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://github.com/google/guice">Google Guice</a> is a dependency injection framework built by Google that allows you to decouple the components of your application by making them reusable parts. Ratpack also offers to you ready to use modules, such as Jackson, H2, Codahale Metrics, Handlebars, etc.</p>
+<p><a href="https://github.com/google/guice">Google Guice</a> is a dependency injection framework built by Google that allows you to decouple
+the components of your application by making them reusable parts. Ratpack also offers to you ready to use modules, such as
+Jackson, H2, Codahale Metrics, Handlebars, etc.</p>
 </div>
 <div class="paragraph">
 <p>When using Gradle and the Ratpack Gradle plugin, adding a "supported" module is as easy as:</p>
@@ -1172,20 +1161,20 @@ However, this is a good exercise for JSON handling.
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">...
 dependencies {
-  compile ratpack.dependency("jackson")
+  compile ratpack.dependency("h2")
 }
 ...</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Then, you have to add the Jackson module to the binding:</p>
+<p>Then, you have to add the H2 module to the binding:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">ratpack {
 
   bindings {
-    add new JacksonModule()
+    add new H2Module()
   }
 
   handlers {
@@ -1195,7 +1184,8 @@ dependencies {
 </div>
 </div>
 <div class="paragraph">
-<p>With the Jackson module, you can benefit from the different ways of reading and writing JSON thanks to the static methods of the <a href="http://ratpack.io/manual/current/api/ratpack/jackson/Jackson.html"><code>Jackson</code></a> class:</p>
+<p>With the Jackson module, you can benefit from the different ways of reading and writing JSON thanks to the static
+methods of the <a href="http://ratpack.io/manual/current/api/ratpack/jackson/Jackson.html"><code>Jackson</code></a> class:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1204,10 +1194,24 @@ dependencies {
 }</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>ratpack-jackson-guice</code> library was removed from <a href="http://ratpack.io/versions/1.0.0-rc-1">1.0.0 RC-1</a> onwards and
+the functionality is now part of <code>ratpack-core</code>. So you don&#8217;t need to change your <code>build.gradle</code> file.
+</td>
+</tr>
+</table>
+</div>
 <div class="sect2">
 <h3 id="_rendering_json_with_jackson">6.1. Rendering JSON with Jackson</h3>
 <div class="paragraph">
-<p>Now the tests have been updated to expect a JSON response when <code>/api/:username</code> endpoint is called. Make the necessary changes to the application to make the test pass.</p>
+<p>Now the tests have been updated to expect a JSON response when <code>/api/:username</code> endpoint is called. Make the necessary
+changes to the application to make the test pass.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1236,7 +1240,7 @@ dependencies {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-11-25 13:44:05 CET
+Last updated 2015-11-26 18:35:54 CET
 </div>
 </div>
 </body>
