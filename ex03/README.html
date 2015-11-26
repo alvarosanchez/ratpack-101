@@ -479,7 +479,7 @@ Handlers are evaluated and executed in the order they are defined. Handlers with
 <div class="sect2">
 <h3 id="_delegating_to_the_next_handler">1.1. Delegating to the next handler</h3>
 <div class="paragraph">
-<p>Define a handler that prints out (<code>println</code>) the requested path, and then delegates to the next handler</p>
+<p>Define a handler that prints out (<code>println</code>) the requested path, and then delegates to the next handler.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -501,6 +501,29 @@ Handlers are evaluated and executed in the order they are defined. Handlers with
 </li>
 </ul>
 </div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can test it by requesting some URL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 0:5050/some/path</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And you should see <code>/some/path</code> in the server logs.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+You will also see a 404 error, as there is no downstream handler defined yet. You can ignore it for the moment.
 </td>
 </tr>
 </table>
@@ -531,6 +554,15 @@ Handlers are evaluated and executed in the order they are defined. Handlers with
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>Then test it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 0:5050/foo
+bar</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -589,6 +621,18 @@ Handlers are evaluated and executed in the order they are defined. Handlers with
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>To test them:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 0:5050/api/methods
+GET /api/methods
+
+$ curl -X POST 0:5050/api/methods
+POST /api/methods</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_defining_variable_parts_in_the_path">1.3.2. Defining variable parts in the path</h4>
@@ -606,6 +650,15 @@ Handlers are evaluated and executed in the order they are defined. Handlers with
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>To test it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 0:5050/api/alvaro.sanchez
+Hello alvaro.sanchez</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -637,6 +690,15 @@ Handlers are evaluated and executed in the order they are defined. Handlers with
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>To test it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 0:5050/api/now
+Thu Nov 26 17:55:44 CET 2015</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -644,7 +706,7 @@ Handlers are evaluated and executed in the order they are defined. Handlers with
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-06-01 13:15:43 CEST
+Last updated 2015-11-26 17:56:49 CET
 </div>
 </div>
 </body>
