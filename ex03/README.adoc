@@ -31,7 +31,7 @@ Using the skeleton provided, work in the `Ratpack.groovy` file to complete the f
 
 === Delegating to the next handler
 
-Define a handler that prints out (`println`) the requested path, and then delegates to the next handler
+Define a handler that prints out (`println`) the requested path, and then delegates to the next handler.
 
 [TIP]
 ====
@@ -39,6 +39,18 @@ Define a handler that prints out (`println`) the requested path, and then delega
 * http://ratpack.io/manual/current/api/ratpack/http/Request.html#getPath--
 * http://ratpack.io/manual/current/api/ratpack/handling/Context.html#next--
 ====
+
+You can test it by requesting some URL:
+
+[source,bash]
+----
+$ curl 0:5050/some/path
+----
+
+And you should see `/some/path` in the server logs.
+
+[NOTE]
+You will also see a 404 error, as there is no downstream handler defined yet. You can ignore it for the moment.
 
 === Responding to a specific path
 
@@ -49,6 +61,14 @@ Define a handler that renders `"bar"` when a request is sent to `/foo`
 * http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#handler-java.lang.String-groovy.lang.Closure-
 * http://ratpack.io/manual/current/api/ratpack/handling/Context.html#render-java.lang.Object-
 ====
+
+Then test it:
+
+[source,bash]
+----
+$ curl 0:5050/foo
+bar
+----
 
 === Grouping handlers by path
 
@@ -70,11 +90,30 @@ Define 2 handlers for the path `/api/methods`:
 * http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyByMethodSpec.html#post-groovy.lang.Closure-
 ====
 
+To test them:
+
+[source,bash]
+----
+$ curl 0:5050/api/methods
+GET /api/methods
+
+$ curl -X POST 0:5050/api/methods
+POST /api/methods
+----
+
 ==== Defining variable parts in the path
 
 Define a handler for the path `/api/<USERNAME>`, where `<USERNAME>` can be any String. The response must be `Hello, <USERNAME>`
 
 TIP: http://ratpack.io/manual/current/api/ratpack/handling/Context.html#getPathTokens--
+
+To test it:
+
+[source,bash]
+----
+$ curl 0:5050/api/alvaro.sanchez
+Hello alvaro.sanchez
+----
 
 ==== Defining handlers in it's own class
 
@@ -87,3 +126,11 @@ Create a handler (implementing `Handler` interface) for the path `/api/now/` and
 * http://ratpack.io/manual/current/api/ratpack/handling/Handler.html
 * http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#handler-java.lang.String-ratpack.handling.Handler-
 ====
+
+To test it:
+
+[source,bash]
+----
+$ curl 0:5050/api/now
+Thu Nov 26 17:55:44 CET 2015
+----
