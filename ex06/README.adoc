@@ -1,11 +1,10 @@
 == Using Ratpack modules with Google Guice (20 minutes)
 
-NOTE: The `ratpack-jackson-guice` library was removed from http://ratpack.io/versions/1.0.0-rc-1[1.0.0 RC-1] onwards and the functionality is now part of `ratpack-core`. This exercise probably needs an update to use a current Ratpack module.
-However, this is a good exercise for JSON handling.
-
 As an optional feature, Ratpack offers you the possibility to enhance your application by using modules powered by Guice.
 
-https://github.com/google/guice[Google Guice] is a dependency injection framework built by Google that allows you to decouple the components of your application by making them reusable parts. Ratpack also offers to you ready to use modules, such as Jackson, H2, Codahale Metrics, Handlebars, etc.
+https://github.com/google/guice[Google Guice] is a dependency injection framework built by Google that allows you to decouple
+the components of your application by making them reusable parts. Ratpack also offers to you ready to use modules, such as
+Jackson, H2, Codahale Metrics, Handlebars, etc.
 
 When using Gradle and the Ratpack Gradle plugin, adding a "supported" module is as easy as:
 
@@ -14,19 +13,19 @@ When using Gradle and the Ratpack Gradle plugin, adding a "supported" module is 
 ----
 ...
 dependencies {
-  compile ratpack.dependency("jackson")
+  compile ratpack.dependency("h2")
 }
 ...
 ----
 
-Then, you have to add the Jackson module to the binding:
+Then, you have to add the H2 module to the binding:
 
 [source,groovy]
 ----
 ratpack {
 
   bindings {
-    add new JacksonModule()
+    add new H2Module()
   }
 
   handlers {
@@ -35,7 +34,8 @@ ratpack {
 }
 ----
 
-With the Jackson module, you can benefit from the different ways of reading and writing JSON thanks to the static methods of the http://ratpack.io/manual/current/api/ratpack/jackson/Jackson.html[`Jackson`] class:
+With the Jackson module, you can benefit from the different ways of reading and writing JSON thanks to the static
+methods of the http://ratpack.io/manual/current/api/ratpack/jackson/Jackson.html[`Jackson`] class:
 
 [source,groovy]
 ----
@@ -44,9 +44,13 @@ handler {
 }
 ----
 
+NOTE: The `ratpack-jackson-guice` library was removed from http://ratpack.io/versions/1.0.0-rc-1[1.0.0 RC-1] onwards and
+the functionality is now part of `ratpack-core`. So you don't need to change your `build.gradle` file.
+
 === Rendering JSON with Jackson
 
-Now the tests have been updated to expect a JSON response when `/api/:username` endpoint is called. Make the necessary changes to the application to make the test pass.
+Now the tests have been updated to expect a JSON response when `/api/:username` endpoint is called. Make the necessary
+changes to the application to make the test pass.
 
 [TIP]
 ====
