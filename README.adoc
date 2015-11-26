@@ -16,17 +16,18 @@ Make sure you have:
 
 * JDK 8 (both in command line and in your IDE).
 * Git.
-* Gradle 2.6.
+* Gradle 2.6+.
 * Groovy 2.4.1+ (on the command line)
 * Lazybones installed via http://gvmtool.net/[GVM].
 
 You should have a similar output in your terminal:
 
+[source,bash]
 ----
 $ java -version
-java version "1.8.0_25"
-Java(TM) SE Runtime Environment (build 1.8.0_25-b17)
-Java HotSpot(TM) 64-Bit Server VM (build 25.25-b02, mixed mode)
+java version "1.8.0_60"
+Java(TM) SE Runtime Environment (build 1.8.0_60-b27)
+Java HotSpot(TM) 64-Bit Server VM (build 25.60-b23, mixed mode)
 
 $ git --version
 git version 2.3.2
@@ -34,20 +35,20 @@ git version 2.3.2
 $ gradle -v
 
 ------------------------------------------------------------
-Gradle 2.6
+Gradle 2.9
 ------------------------------------------------------------
 
-Build time:   2015-02-16 05:09:33 UTC
+Build time:   2015-11-17 07:02:17 UTC
 Build number: none
-Revision:     586be72bf6e3df1ee7676d1f2a3afd9157341274
+Revision:     b463d7980c40d44c4657dc80025275b84a29e31f
 
-Groovy:       2.3.9
+Groovy:       2.4.4
 Ant:          Apache Ant(TM) version 1.9.3 compiled on December 23 2013
-JVM:          1.8.0_25 (Oracle Corporation 25.25-b02)
-OS:           Mac OS X 10.10.2 x86_64
+JVM:          1.8.0_60 (Oracle Corporation 25.60-b23)
+OS:           Mac OS X 10.11.1 x86_64
 
 $ groovy -v
-Groovy Version: 2.4.3 JVM: 1.8.0_25 Vendor: Oracle Corporation OS: Mac OS X
+Groovy Version: 2.4.5 JVM: 1.8.0_60 Vendor: Oracle Corporation OS: Mac OS X
 
 $ lazybones help
 Lazybones is a command-line based tool for creating basic software projects from templates.
