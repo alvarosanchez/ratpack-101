@@ -16,7 +16,7 @@ Each handler receives a http://ratpack.io/manual/current/api/ratpack/handling/Co
 ----
 ratpack {
     handlers {
-        handler {
+        all {
             response.send("Hello World") //Equivalent to context.response.send("Hello World")
         }
     }
@@ -58,7 +58,7 @@ Define a handler that renders `"bar"` when a request is sent to `/foo`
 
 [TIP]
 ====
-* http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#handler-java.lang.String-groovy.lang.Closure-
+* http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#all-groovy.lang.Closure-
 * http://ratpack.io/manual/current/api/ratpack/handling/Context.html#render-java.lang.Object-
 ====
 
@@ -124,7 +124,7 @@ Create a handler (implementing `Handler` interface) for the path `/api/now/` and
 [TIP]
 ====
 * http://ratpack.io/manual/current/api/ratpack/handling/Handler.html
-* http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#handler-java.lang.String-ratpack.handling.Handler-
+* http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#all-ratpack.handling.Handler-
 ====
 
 To test it:
