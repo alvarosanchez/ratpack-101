@@ -728,7 +728,7 @@ Ratpack <strong>is not</strong> Servlet API-based, so don&#8217;t expect things 
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">ratpack {
     handlers {
-        handler {
+        all {
             response.send("Hello World") //Equivalent to context.response.send("Hello World")
         }
     }
@@ -818,7 +818,7 @@ You will also see a 404 error, as there is no downstream handler defined yet. Yo
 <div class="ulist">
 <ul>
 <li>
-<p><a href="http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#handler-java.lang.String-groovy.lang.Closure-" class="bare">http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#handler-java.lang.String-groovy.lang.Closure-</a></p>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#all-groovy.lang.Closure-" class="bare">http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#all-groovy.lang.Closure-</a></p>
 </li>
 <li>
 <p><a href="http://ratpack.io/manual/current/api/ratpack/handling/Context.html#render-java.lang.Object-" class="bare">http://ratpack.io/manual/current/api/ratpack/handling/Context.html#render-java.lang.Object-</a></p>
@@ -956,7 +956,7 @@ Hello alvaro.sanchez</code></pre>
 <p><a href="http://ratpack.io/manual/current/api/ratpack/handling/Handler.html" class="bare">http://ratpack.io/manual/current/api/ratpack/handling/Handler.html</a></p>
 </li>
 <li>
-<p><a href="http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#handler-java.lang.String-ratpack.handling.Handler-" class="bare">http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#handler-java.lang.String-ratpack.handling.Handler-</a></p>
+<p><a href="http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#all-ratpack.handling.Handler-" class="bare">http://ratpack.io/manual/current/api/ratpack/groovy/handling/GroovyChain.html#all-ratpack.handling.Handler-</a></p>
 </li>
 </ul>
 </div>
